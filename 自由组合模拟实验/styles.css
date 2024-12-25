@@ -1,0 +1,1447 @@
+/* 设置整体背景色 */
+body {
+    background-color: rgba(220, 237, 220, 0.3);  /* 更淡的绿色，0.3透明度 */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;               /* 使用弹性布局使内容居中 */
+    justify-content: center;     /* 水平居中 */
+    align-items: center;         /* 垂直居中 */
+}
+
+/* 主容器样式 */
+.container {
+    display: grid;                
+    grid-template-columns: 1fr 1fr 1fr;  /* 三等分布局 */
+    grid-template-rows: auto auto;       /* 添加第二行用于控制面板 */
+    gap: 20px;                    /* 区块间距 */
+    width: 90%;                   /* 改为百分比宽度 */
+    max-width: 1100px;            
+    min-width: auto;              /* 移除最小宽度限制 */
+    height: auto;                 /* 改为自适应高度 */
+    margin: 20px auto;            
+    padding: 20px;                
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为与网页背景相同的浅绿色 */
+    border-radius: 12px;          
+    box-sizing: border-box;
+}
+
+/* 三个主要区块的基础样式 */
+.section-block {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    height: 100%;                 
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;             /* 内容过多时显示滚动条 */
+    max-height: calc(100% - 30px); /* 确保不超过容器高度 */
+    margin-bottom: 15px;          /* 底部留出间距 */
+}
+
+/* 实验区样式 */
+.experiment-area {
+    composes: section-block;
+}
+
+/* 基因型统计区样式 */
+.genotype-stats-column {
+    composes: section-block;
+}
+
+/* 表型统计区样式 */
+.phenotype-stats-column {
+    composes: section-block;
+}
+
+/* 控制面板样式 */
+.control-panel {
+    margin-top: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为与网页背景相同的浅绿色 */
+    border-radius: 8px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* 按钮基础样式 */
+button {
+    padding: 8px 4px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为浅绿色 */
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    box-sizing: border-box;
+}
+
+/* 第一行按钮（形成配子）样式 */
+.control-row:nth-child(1) button {
+    width: 160px;               /* 增加宽度 */
+    font-size: 20px;            /* 更大的字号 */
+}
+
+/* 第二行按钮（完成受精）样式 */
+.control-row:nth-child(2) button {
+    width: 328px;               /* 增加宽度 */
+    font-size: 22px;            /* 最大的字号 */
+    background-color: rgba(33, 150, 243, 0.3);  /* 特殊的蓝色背景 */
+}
+
+/* 第三行按钮（模拟次数）容器样式 */
+.control-row:nth-child(3) {
+    gap: 6px;                    /* 保持按钮间距 */
+    display: flex;               /* 使用弹性布局 */
+    justify-content: center;     /* 水平居中 */
+}
+
+/* 第三行按钮样式 */
+.control-row:nth-child(3) button {
+    padding: 8px 12px;           /* 增加水平内边距 */
+    font-size: 16px;             /* 保持字体大小 */
+    white-space: nowrap;         /* 防止文字换行 */
+    flex: 1;                     /* 让按钮平均分配空间 */
+}
+
+/* 第四行按钮（统计和清空）样式 */
+.control-row:nth-child(4) button {
+    width: 160px;               /* 增加宽度 */
+    font-size: 20px;            /* 更大的字号 */
+}
+
+/* 按钮悬停效果 */
+button:hover {
+    background-color: rgba(220, 237, 220, 0.5);  /* 改为浅绿色，加深透明度 */
+}
+
+#fertilization-btn:hover {
+    background-color: rgba(33, 150, 243, 0.5);   /* 加深蓝色 */
+}
+
+/* 特殊按钮样式 */
+#fertilization-btn {
+    width: 250px;
+    background-color: #e8f5e9;
+}
+
+#clear-btn {
+    background-color: #ffebee;
+}
+
+/* 统计区域基础样式 */
+.genotype-stats, .phenotype-stats {
+    width: 100%;                  /* 宽度100% */
+    margin: 0;                    /* 无外边距 */
+}
+
+/* 统计区域标题样式 */
+.genotype-stats h3, .phenotype-stats h3 {
+    margin: 0 0 15px 0;           /* 上右下左外边距 */
+    text-align: center;           /* 文字居中 */
+    color: #333;                  /* 深灰色文字 */
+    font-size: 24px;              /* 字体大小16px */
+    width: 100%;                  /* 确保标题占满容器宽度 */
+    position: relative;           /* 相对定位 */
+    left: 50%;                    /* 向右偏移50% */
+    transform: translateX(-50%);  /* 向左回移自身宽的50%，实现精确居中 */
+}
+
+/* 统计内容容器 */
+#genotype-stats-content, #phenotype-stats-content {
+    padding: 15px;                /* 内容区域内边距 */
+}
+
+/* 统计行样式 */
+.stat-row {
+    display: grid;                /* 网格布局 */
+    grid-template-columns: 2fr 1fr 1fr;  /* 三列布局 */
+    padding: 5px 10px;            /* 减小内边距 */
+    margin: 4px 0;                
+    border: 1px solid #ddd;       /* 边框 */
+    border-radius: 4px;           /* 圆角 */
+    font-size: 13px;              /* 稍微减小字体 */
+    align-items: center;          /* 垂直居中 */
+    background-color: white;      /* 每行保持白色背景 */
+    width: calc(100% - 16px);     /* 计算宽度，减去内边距 */
+}
+
+/* 表头行样式 */
+.header-row {
+    background-color: #f8f9fa;    /* 浅灰色背景 */
+    font-weight: bold;            /* 粗体文字 */
+    border-bottom: 2px solid #dee2e6;  /* 底部边框 */
+    margin-bottom: 8px;           /* 底部外边距8px */
+}
+
+/* 统计值和比值的基础样式 */
+.count, .ratio {
+    text-align: right;            /* 文字右对齐 */
+    font-family: monospace;       /* 等宽字体 */
+    padding: 2px 4px;             /* 内距 */
+    border-radius: 3px;           /* 圆角 */
+    background-color: #fff3d4;    /* 浅黄色背景 */
+}
+
+/* 比值单独样式 */
+.ratio {
+    background-color: #e8f5e9;    /* 浅绿色背景 */
+}
+
+/* 整模拟控制��样式 */
+.simulation-controls {
+    width: 248px;
+    margin: 0;
+    padding: 0;
+}
+
+/* 响应式布局调整 */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .genotype-stats-column,
+    .phenotype-controls-column {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+/* 实验标题样式 */
+.experiment-area h2 {
+    margin: 0;                   /* 移除默认边距 */
+    padding: 0;                  /* 移除默认内边距 */
+    text-align: center;          /* 文本居中 */
+    width: 100%;                 /* 占容器宽度 */
+    font-size: 24px;             /* 设置字体大小 */
+    color: #333;                 /* 设置字体颜色 */
+    margin-bottom: 20px;         /* 添加底部距 */
+}
+/* 右侧统计区域样式 */
+.statistics-area {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    max-width: 350px;
+}
+
+
+
+.genotype-stats h3, .phenotype-stats h3 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+
+#genotype-stats-content, #phenotype-stats-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 6px 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    font-size: 14px;
+    align-items: center;
+    width: 218px;
+    margin: 0 auto;
+}
+
+.header-row {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.genotype, .phenotype {
+    font-family: monospace;
+}
+
+.count, .ratio {
+    text-align: right;
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.count {
+    background-color: #fff3d4;
+}
+
+.ratio {
+    background-color: #e8f5e9;
+}
+
+/* 第一行（子一代）布局样式 */
+.first-row {
+    display: grid;               /* 使用网格布局 */
+    grid-template-columns: 60px 80px 50px 80px;  /* 四列宽度设置 */
+    justify-content: center;     /* 水平居中对齐 */
+    align-items: center;         /* 垂直居中对齐 */
+    gap: 30px;                   /* 网格元素间距 */
+    margin: 0 auto 40px;         /* 上0 右自动 下40px */
+    width: 400px;                /* 固定宽度 */
+}
+
+/* 第一行中基因本样式 */
+.first-row .gene {
+    font-size: 20px;             /* 字体大小 */
+    font-family: monospace;      /* 等宽字体 */
+    text-align: center;          /* 文本居中 */
+    width: 80px;                 /* 固定宽度 */
+}
+
+/* 第二行布局样式 */
+.second-row {
+    display: grid;               /* 使用网格布局 */
+    grid-template-columns: auto 1fr;  /* 两列：自动宽度和剩余空间 */
+    align-items: center;         /* 垂直居中对齐 */
+    gap: 20px;                   /* 列间距 */
+}
+
+/* 行标题样式 */
+.row-title {
+    font-size: 18px;             /* 字体大小 */
+    align-self: center;          /* 自垂直中 */
+    white-space: nowrap;         /* 防止文字换行 */
+}
+
+/* 基因框容器样式 */
+.boxes-container {
+    position: relative;          /* 相对定位，作为元素的定位参考 */
+    width: 400px;                /* 固定宽度 */
+    margin: 0 auto;              /* 水平居中 */
+}
+
+/* 基因框组样式 */
+.gene-box-group {
+    display: flex;               /* 使用弹性布局 */
+    width: 80px;                 /* 固定宽度 */
+    position: absolute;          /* 绝对定位 */
+}
+
+/* 第一个基因框组位置 */
+.gene-box-group:first-child {
+    left: 60px;                  /* 距左边60px */
+}
+
+/* 最后一个基因框组位置 */
+.gene-box-group:last-child {
+    right: 60px;                 /* 距右边60px */
+}
+
+/* 基因框基础样式 */
+.gene-box {
+    width: 42px;
+    height: 35px;                /* 改为35px，与其他一致 */
+    border: 2px solid transparent;  /* 边框透明 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    font-size: 28px;
+}
+
+/* 相邻基因框边框处理 */
+.gene-box-group .gene-box:not(:first-child) {
+    border-left: none;           /* 移除左边框，使相邻框共用边框 */
+}
+
+/* 第三行（配子行）样式 */
+.third-row {
+    display: flex;               /* 用弹性布局 */
+    justify-content: center;     /* 水平居中 */
+    align-items: center;         /* 垂直居中 */
+    gap: 30px;                   /* 元素间距 */
+    margin-bottom: 30px;         /* 底部间距 */
+}
+
+/* 第三行标签最小宽度 */
+.third-row span {
+    min-width: 60px;             /* 最小宽度 */
+}
+
+/* 子框样式 */
+.gamete-box {
+    width: 110px;                /* 固定宽度 */
+    height: 40px;                /* 固定高度 */
+    border: 2px solid #333;      /* 边框样式 */
+    display: flex;               /* 使用弹性布局 */
+    justify-content: center;     /* 水平居中 */
+    align-items: center;         /* 垂直居中 */
+    font-family: monospace;      /* 等宽字体 */
+    font-size: 18px;             /* 字体大小 */
+    border-radius: 8px;          /* 添加圆角 */
+}
+
+/* 第四行（子二代）样式 */
+.fourth-row {
+    display: flex;               /* 使用弹性布局 */
+    justify-content: center;     /* 水平居中 */
+    align-items: center;         /* 垂直居中 */
+    gap: 20px;                   /* 元素间距 */
+    margin-bottom: 20px;         /* 底部间距 */
+}
+
+/* F2结果样式 */
+.f2-box {
+    width: 190px;               /* 从130px增加到190px (130 + 60) */
+    height: 35px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    margin: 0;                  /* 移除自动边距 */
+}
+
+/* 表型框样式 */
+.phenotype-box {
+    width: 190px;               /* 从130px增加到190px (130 + 60) */
+    height: 35px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    margin: 0;                  /* 移除自动边距 */
+}
+
+/* 模拟控制区布局 */
+.simulation-controls {
+    max-width: 240px;            /* 最大宽度 */
+    margin: 10px auto;           /* 上下10px左右自动居中 */
+    padding: 1px;               /* 内距 */
+    display: flex;               /* 使用弹性布局 */
+    flex-direction: column;      /* 垂直列 */
+    gap: 12px;                    /* 按钮行之间的间距 */
+}
+
+/* 按钮行基础样式 */
+.control-row {
+    display: flex;               /* 使用弹性布局 */
+    gap: 8px;                    /* 按钮之间间距 */
+    justify-content: center;     /* 水平居中 */
+    width: 100%;                 /* 占满容器宽度 */
+    margin: 0;                   /* 移除外边距 */
+}
+
+/* 第一行按钮（形成配子）样式 */
+.control-row:nth-child(1) button {
+    width: 120px;                /* 固定宽度 */
+}
+
+/* 第二行按钮（完成受精）样式 */
+.control-row:nth-child(2) button {
+    width: 248px;                /* 固定宽度 */
+}
+
+/* 第三行按钮（模拟次数）容器样式 */
+.control-row:nth-child(3) {
+    gap: 2px;                    /* 减小按钮间距 */
+}
+
+/* 第三行按钮样式 */
+.control-row:nth-child(3) button {
+    width: 60px;                 /* 固定宽度 */
+    padding: 6px 2px;            /* 减小内边距 */
+    font-size: 14px;             /* 较小字体 */
+}
+
+/* 第四行按钮（统计和清空）样式 */
+.control-row:nth-child(4) button {
+    width: 120px;                /* 固定宽度 */
+}
+
+/* 统一按钮基样式 */
+button {
+    padding: 5px 10px;            /* 减小按钮内边距 */
+    font-size: 14px;              /* 减小按钮字体 */
+    cursor: pointer;             /* 鼠标指针样式 */
+    background-color: #f0f0f0;   /* 背景色 */
+    border: 1px solid #ccc;      /* 边框样式 */
+    border-radius: 4px;          /* 圆角 */
+    transition: background-color 0.2s;  /* 背景色过渡动画 */
+    margin: 0;                   /* 移除外边距 */
+}
+
+/* 按钮停效果 */
+button:hover {
+    background-color: #e0e0e0;   /* 停时背景色 */
+}
+
+/* 特殊按钮样式 - 完成受精按钮 */
+#fertilization-btn {
+    background-color: #e3f2fd;   /* 浅蓝色背景 */
+}
+
+/* 特殊按钮样式 - 统计结果按钮 */
+#stats-btn {
+    background-color: #e8f5e9;   /* 浅绿色背景 */
+}
+
+/* 特殊按钮样式 - 清空按钮 */
+#clear-btn {
+    background-color: #fce4ec;   /* 浅粉色背景 */
+}
+
+.stats-results {
+    margin-top: 30px;
+}
+
+.genotype-ratio, .phenotype-ratio {
+    margin-bottom: 20px;
+}
+
+#genotype-ratio-result, #phenotype-ratio-result {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+}
+
+.statistics-area div {
+    margin-bottom: 8px;
+}
+
+.genotype-stats, .phenotype-stats {
+    flex: 1;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    padding: 4px 6px;
+    margin: 2px 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.genotype, .phenotype {
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+}
+
+.count, .ratio {
+    font-family: monospace;
+    font-size: 14px;
+    text-align: right;
+    min-width: 40px;
+    padding: 1px 4px;
+}
+
+#genotype-stats-content, #phenotype-stats-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.genotype-stats h3, .phenotype-stats h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+/* 添加辅助来控制齐 */
+.align-with-first {
+    width: 400px;
+}
+
+/* 实验容器样式 */
+.experiment-container {
+    width: 400px;                /* 减小实验区宽度 */
+    margin: 0 auto;              
+    padding: 20px 0;             
+    border: 1px solid #ccc;      
+    border-radius: 8px;          
+    background-color: #fff;      
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* 阴影效果 */
+}
+
+/* 基因框容器样式 */
+.gene-boxes-container {
+    width: 280px;                /* 减小宽度 */
+    margin: 0 auto 25px;         
+    display: grid;               
+    grid-template-columns: repeat(2, 70px);  /* 小基因框小 */
+    justify-content: center;     
+    gap: 90px;                   /* 调整间距 */
+   /* background-color: rgba(243, 229, 245, 0.3);  /* 浅色背景，30%透明度 */
+    padding: 10px;               /* 内边距 */
+}
+
+/* 基因框对式 */
+.gene-box-pair {
+    display: grid;               /* 使用网格布局 */
+    grid-template-columns: repeat(2, 40px);  /* 两列，每40px */
+}
+
+/* 配子框容器样式 */
+.gamete-boxes {
+    display: flex;
+    gap: 8px;                   /* 调整间隔为8px与第二行保持一致 */
+    width: 190px;               /* 设置总宽度为190px */
+    box-sizing: border-box;
+    justify-content: space-between; /* 两端对齐 */
+}
+
+/* 行式 */
+.row {
+    position: relative;          /* 相对定位 */
+    margin-left: 130px;          /* 左侧外边距 */
+    margin-bottom: 30px;         /* 底部外边距 */
+    padding: 10px;               /* 内边距 */
+    border-radius: 4px;          /* 圆角 */
+}
+
+/* 不同行背景色 */
+/* .f1-row {
+    background-color: rgba(227, 242, 253, 0.3);  /* 浅色背景，30%透明度 */
+/* }
+
+.gene-separation {
+    background-color: rgba(243, 229, 245, 0.3);  /* 浅紫色背景，30%透明度 */
+/* }
+
+.gamete-row {
+    background-color: rgba(232, 245, 233, 0.3);  /* 浅绿色背景，30%透明度 */
+/* }
+
+.f2-row {
+    background-color: rgba(255, 243, 224, 0.3);  /* 浅橙色背景，30%透明度 */
+/* }
+
+.phenotype-row {
+    background-color: rgba(252, 228, 236, 0.3);  /* 浅粉色背景，30%透明度 */
+/* }
+
+
+
+
+
+/* 相邻基因框边框处理 */
+.gene-box-pair .gene-box:first-child {
+    border-top-right-radius: 0;    /* 上角不圆角 */
+    border-bottom-right-radius: 0; /* 右下角不圆角 */
+}
+
+.gene-box-pair .gene-box:last-child {
+    border-top-left-radius: 0;     /* 左上角不圆角 */
+    border-bottom-left-radius: 0;  /* 左下角不圆角 */
+    border-left: none;             /* 移除左边框，使相邻框共用边框 */
+} 
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+        min-height: auto;         /* 移除最小高度限制 */
+    }
+
+    .container {
+        grid-template-columns: 1fr;  /* 在移动端改为单列布局 */
+        grid-template-rows: auto;    /* 自动行高 */
+        width: 100%;
+        gap: 15px;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .section-block {
+        height: auto;             /* 高度 */
+        max-height: none;         /* 除最大高度限制 */
+        margin-bottom: 10px;
+    }
+
+    /* 调整实验区域在移动端的布局 */
+    .exp-content {
+        padding: 0;
+    }
+
+    .exp-row {
+        flex-wrap: wrap;          /* 允许内容换行 */
+        justify-content: flex-start;
+    }
+
+    .row-label {
+        width: 100%;              /* 标签占宽度 */
+        text-align: left;         /* 左对齐 */
+        padding-left: 5px;
+        margin-bottom: 5px;
+    }
+
+    /* 调整基因框和配子框大小 */
+    .gene-box {
+        width: 35px;              /* 减小基因框大小 */
+        height: 35px;
+    }
+
+    .gamete-box {
+        width: 60px;              /* 减小配子框大小 */
+    }
+
+    .f2-box, .phenotype-box {
+        width: 120px;             /* 减小结果框大小 */
+    }
+
+    /* 调整控制面板按钮 */
+    .control-panel {
+        margin-top: 15px;
+    }
+
+    .control-row {
+        flex-wrap: wrap;          /* 许按钮换行 */
+        gap: 5px;
+    }
+
+    .control-row button {
+        flex: 1;                  /* 按钮平均配空间 */
+        min-width: 80px;          /* 设置最小宽度 */
+        font-size: 12px;          /* 减小字体大小 */
+    }
+
+    /* 调整统计表格 */
+    .stats-table {
+        width: 100%;
+        font-size: 12px;          /* 减小字体大小 */
+    }
+
+    .stats-table th,
+    .stats-table td {
+        padding: 4px;             /* 减小内边距 */
+    }
+}
+
+/* 统计表格基样式 */
+.stats-table {
+    width: calc(100% - 30px);    /* 保持左右边距15px */
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-family: "黑体", SimHei, sans-serif;
+    font-size: 18px;             /* 基础字体大小 */
+    table-layout: fixed;         /* 使用固定表格布局 */
+}
+
+/* 设置表格列宽 */
+.stats-table th,
+.stats-table td {
+    padding: 8px 4px;           
+    text-align: center;         
+    border: 1px solid #ddd;     
+    height: 40px;
+}
+
+/* 统一两个表格的列宽分配 */
+.stats-table th:nth-child(1),
+.stats-table td:nth-child(1) {
+    width: 45%;                /* 第一列（基因型/表型）占45% */
+}
+
+.stats-table th:nth-child(2),
+.stats-table td:nth-child(2) {
+    width: 27.5%;             /* 第二列（统计值）占27.5% */
+}
+
+.stats-table th:nth-child(3),
+.stats-table td:nth-child(3) {
+    width: 27.5%;             /* 第三列（比值）占27.5% */
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 393px) {
+    .stats-table {
+        font-size: 16px;
+        width: calc(100% - 20px);  /* 移动端减小边距 */
+    }
+}
+
+/* 移除表格行悬停效果 */
+.stats-table tr:hover {
+    background-color: transparent;
+}
+
+/* 确保表格在容器中居中 */
+.genotype-stats-column,
+.phenotype-stats-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 移除表格的白色背景和阴影 */
+.stats-table {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.block-title {
+    margin: 0 0 20px 0;
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+}
+
+/* 题和作者样式 */
+.exp-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.author {
+    text-align: center;
+    font-size: 8px;             /* 改为8px */
+    font-style: italic;         /* 保持斜体 */
+    color: #666;               /* 保持灰色 */
+    margin-bottom: 20px;       /* 保持间距 */
+    font-family: Arial, sans-serif;
+}
+
+/* 实验区标签统一样式 */
+.row-label {
+    width: 100px;
+    text-align: right;
+    padding: 2px 4px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #666;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为与网页背景相同的绿色 */
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 35px;
+    box-sizing: border-box;
+}
+
+/* 调整行布局 */
+.exp-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;         /* 行间距 */
+    padding-left: 5px;
+}
+
+/* 修改子二代和表型框的容器样式 */
+.f2-row .row-content,
+.phenotype-row .row-content {
+    display: flex;
+    width: 190px;               /* 设置固定总宽度 */
+    box-sizing: border-box;
+    justify-content: flex-start; /* 左对齐 */
+}
+
+/* 修改子二代和表型框的样式 */
+.f2-box,
+.phenotype-box {
+    width: 190px;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 24px;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为浅绿色 */
+}
+
+/* 一代框式 */
+.parent-box {
+    width: 190px;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为浅绿色 */
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+/* 第二行基因框容器样式 */
+.gene-boxes {
+    display: flex;
+    gap: 8px;                   /* 调整间隔为8px */
+    width: 190px;               /* 宽度 */
+    box-sizing: border-box;
+    justify-content: space-between; /* 两端对齐 */
+}
+
+.gene-pair {
+    display: flex;
+    gap: 2px;                   /* 保持基因对内部间距 */
+}
+
+.gene-box {
+    width: 42px;                /* 调整单个框的宽度 */
+    height: 35px;                /* 改为35px，与其他框一致 */
+    border: 2px solid transparent;  /* 边框透明 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    font-size: 28px;            /* 增大字号 */
+    background-color: rgba(156, 39, 176, 0.5);  /* 优雅紫 */
+}
+
+/* 配子框样式 */
+.gamete-box {
+    width: 91px;                /* (190px - 8px间隔) ÷ 2 = 91px */
+    height: 35px;               /* 与其他行保持一致 */
+    border: 2px solid transparent;  /* 边框透明 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    font-size: 24px;            /* 增大字号 */
+    background-color: rgba(33, 150, 243, 0.5);  /* 天空蓝 */
+}
+
+/* F2和表型框样式 */
+.f2-box,
+.phenotype-box {
+    width: 190px;
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 24px;
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为浅绿色 */
+}
+
+/* 配子框基础样式 */
+.gamete-box {
+    width: 91px;
+    height: 35px;
+    border: 2px solid transparent;  /* 边���透明 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+/* 左侧配子框（粉色系） */
+#female-gamete {
+    background-color: rgba(244, 143, 177, 0.5);  /* 柔和的粉色 */
+}
+
+/* 右侧配子框（蓝色系） */
+#male-gamete {
+    background-color: rgba(100, 181, 246, 0.5);  /* 清爽的蓝色 */
+}
+
+/* 左侧基因框 */
+.gene-pair:first-child .gene-box {
+    background-color: rgba(244, 143, 177, 0.5);  /* 柔和的粉色 */
+}
+
+/* 右侧基因框 */
+.gene-pair:last-child .gene-box {
+    background-color: rgba(100, 181, 246, 0.5);  /* 清爽的蓝色 */
+}
+
+/* 移除之前基的通用背景色 */
+.gene-box {
+    width: 42px;
+    height: 35px;                /* 改为35px，与其他框一致 */
+    border: 2px solid transparent;  /* 边框透明 */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    font-size: 28px;
+}
+
+/* 移动端适配 - 针对 iPhone 16 Pro */
+@media screen and (max-width: 393px) {
+    /* 容器适配 */
+    .container {
+        width: 100%;
+        padding: 10px;
+        gap: 15px;
+        grid-template-columns: 1fr;  /* 改为单列布局 */
+    }
+
+    /* 实验区域适配 */
+    .experiment-area {
+        padding: 10px;
+    }
+
+    /* 标签适配 */
+    .row-label {
+        width: 110px;             /* 从90px增加到110px */
+        font-size: 14px;         
+        margin-right: 8px;       
+    }
+
+    /* 子一代框适配 */
+    .parent-box {
+        width: 160px;           /* 减小宽度 */
+        font-size: 20px;        /* 减小字体 */
+    }
+
+    /* 基因框适配 */
+    .gene-box {
+        width: 35px;            /* 减小宽度 */
+        height: 35px;
+        font-size: 24px;        /* 减小字体 */
+    }
+
+    /* 配子框适配 */
+    .gamete-box {
+        width: 75px;            /* 减小宽度 */
+        font-size: 20px;        /* 减小字体 */
+    }
+
+    /* F2和表型框适配 */
+    .f2-box,
+    .phenotype-box {
+        width: 160px;           /* 减小宽度 */
+        font-size: 20px;        /* 减小字体 */
+    }
+
+    /* 基因框容器适配 */
+    .gene-boxes {
+        gap: 6px;               /* 减小间距 */
+    }
+
+    /* 配子框容器适配 */
+    .gamete-boxes {
+        gap: 10px;              /* 减小间距 */
+    }
+
+    /* 统计表格适配 */
+    .stats-table {
+        font-size: 12px;        /* 减小字体 */
+    }
+
+    /* 按钮适配 */
+    .control-panel {
+        margin-top: 15px;
+    }
+
+    .control-row {
+        gap: 5px;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    /* 统计表格容器适配 */
+    .genotype-stats-column,
+    .phenotype-stats-column {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow-x: auto;         /* 允许横向滚动 */
+    }
+
+    /* 统计表格适配 */
+    .stats-table {
+        width: 100%;
+        min-width: 300px;         /* 设置小度 */
+        font-size: 12px;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+    /* 表格单元格适配 */
+    .stats-table th,
+    .stats-table td {
+        padding: 6px 4px;
+        font-size: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+        white-space: nowrap;      /* 防止文字换行 */
+    }
+
+    /* 表格标题适配 */
+    .block-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* 确保表格不会溢出容器 */
+    .section-block {
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: auto;         /* 允许横向滚动 */
+        -webkit-overflow-scrolling: touch;  /* 在iOS上提供平滑滚动 */
+    }
+
+    /* 统计表格数字样式 */
+    .stats-table .number {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+/* 所有框的通用边框样式 */
+.row-label,
+.parent-box,
+.gene-box,
+.gamete-box,
+.f2-box,
+.phenotype-box {
+    border: 1px solid #ccc;  /* 统一使用1px细边框 */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* 相邻基因框边框处理 */
+.gene-pair .gene-box:first-child {
+    border-right: none;  /* 移除右边框 */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.gene-pair .gene-box:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* 实验内容区域样式 */
+.exp-content {
+    background-color: rgba(255, 255, 255, 0.3);  /* 改为白色，0.3透明度 */
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 393px) {
+    .exp-content {
+        padding: 15px;
+        margin-top: 8px;
+    }
+}
+
+/* 自由组合标签特殊样式 */
+.separation-row .row-label {
+    background-color: rgba(156, 39, 176, 0.3);  /* 改为淡紫色 */
+    color: #333;
+}
+
+/* 悬停效果 */
+.separation-row .row-label:hover {
+    background-color: rgba(156, 39, 176, 0.4);  /* 悬停时稍微加深 */
+}
+
+/* 形成雌配子按钮样式 */
+#female-gamete-btn {
+    background-color: rgba(244, 143, 177, 0.3);  /* 淡粉色，与配子框颜色相呼应 */
+}
+
+/* 形成雄子按钮样式 */
+#male-gamete-btn {
+    background-color: rgba(100, 181, 246, 0.3);  /* 淡蓝色，与配子框颜色相呼应 */
+}
+
+/* 按钮悬停效果 */
+#female-gamete-btn:hover {
+    background-color: rgba(244, 143, 177, 0.5);  /* 加深粉色 */
+}
+
+#male-gamete-btn:hover {
+    background-color: rgba(100, 181, 246, 0.5);  /* 加深蓝色 */
+}
+
+/* 移除其他按钮的特殊背景色 */
+#fertilization-btn,
+#single-sim,
+#sim-10,
+#sim-100,
+#sim-1000,
+#stats-btn,
+#clear-btn {
+    background-color: rgba(220, 237, 220, 0.3);  /* 改为浅绿色 */
+}
+
+/* 移除其他按钮的特殊悬停效果 */
+#fertilization-btn:hover,
+#single-sim:hover,
+#sim-10:hover,
+#sim-100:hover,
+#sim-1000:hover,
+#stats-btn:hover,
+#clear-btn:hover {
+    background-color: rgba(220, 237, 220, 0.5);  /* 改为浅绿色，加深透明度 */
+}
+
+/* 标题行样式 */
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+/* 帮助按钮样式 */
+.help-button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #666;
+    background: white;
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.help-button:hover {
+    background: #f0f0f0;
+}
+
+/* 模态窗口样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.close-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #666;
+}
+
+.rules-content {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.rules-content h3 {
+    color: #333;
+    margin: 16px 0 8px;
+    font-size: 18px;
+}
+
+.rules-content h4 {
+    color: #444;
+    margin: 12px 0 6px;
+    font-size: 16px;
+}
+
+.rules-content ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.rules-content li {
+    margin: 4px 0;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 393px) {
+    .modal-content {
+        margin: 3% auto;
+        width: 90%;
+        padding: 15px;
+        max-height: 90vh;
+    }
+    
+    .rules-content {
+        font-size: 13px;
+    }
+}
+
+/* 表型显示区域样式 */
+.phenotype-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 190px;
+}
+
+/* 表型文字框样式 */
+.phenotype-box {
+    width: 80px;  /* 减小宽度,从120px改为80px */
+    height: 35px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 16px;  /* 稍微减小字号 */
+    background-color: rgba(220, 237, 220, 0.3);
+}
+
+/* 豌豆图片容器样式 */
+.pea-image {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pea-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 393px) {
+    .phenotype-display {
+        width: auto;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    
+    .phenotype-box {
+        width: 40px;
+        font-size: 16px;
+    }
+
+    .pea-image {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* F1行的父容器样式 */
+.f1-row {
+    position: relative;  /* 作为定位参考 */
+    padding-top: 40px;   /* 为上方的豌豆图片留出空间 */
+}
+
+/* F1代豌豆容器样式 */
+.f1-peas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 70px;  /* 保持两个豌豆之间的间距 */
+}
+
+/* F1代豌豆图片样式 */
+.f1-pea {
+    width: 35px;  /* 保持原有大小 */
+    height: 35px;
+    transform: translateX(45px);  /* 默认偏移量 */
+}
+
+.f1-pea img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 393px) {
+    /* 第一个豌豆（左边）保持原位置 */
+    .f1-pea:first-child {
+        transform: translateX(65px);  /* 保持原来的偏移量 */
+    }
+    
+    /* 第二个豌豆（右边）向右多移动5px */
+    .f1-pea:last-child {
+        transform: translateX(70px);  /* 从65px增加到70px */
+    }
+}
