@@ -1,7 +1,11 @@
 # IDE
+# IDE配置
+# Node.js
 # Python
+# 临时文件
 # 日志文件
 # 本地配置
+# 构建输出
 # 系统文件
 *$py.class
 *.egg
@@ -10,12 +14,16 @@
 *.py[cod]
 *.pyc
 *.so
+*.sublime-project
+*.sublime-workspace
 *.swo
 *.swp
+*.tmp
 *~
 .DS_Store
 .Python
 .eggs/
+.env
 .idea/
 .installed.cfg
 .vscode/
@@ -27,10 +35,15 @@ dist/
 downloads/
 eggs/
 env/
+github_config.json
 github_settings.json
 lib/
 lib64/
+node_modules/
+npm-debug.log
 parts/
 sdist/
 var/
 wheels/
+yarn-debug.log
+yarn-error.log
