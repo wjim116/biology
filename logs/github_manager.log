@@ -1,0 +1,14 @@
+2024-12-27 13:18:59,651 - github_manager - INFO - Successfully connected to GitHub
+2024-12-27 13:18:59,689 - github_manager - WARNING - 命令失败 (尝试 1/3): Git命令失败: fatal: destination path '.' already exists and is not an empty directory.
+2024-12-27 13:18:59,891 - github_manager - INFO - Successfully connected to GitHub
+2024-12-27 13:18:59,925 - github_manager - WARNING - 命令失败 (尝试 2/3): Git命令失败: fatal: destination path '.' already exists and is not an empty directory.
+2024-12-27 13:19:00,103 - github_manager - INFO - Successfully connected to GitHub
+2024-12-27 13:19:00,139 - github_manager - WARNING - 命令失败 (尝试 3/3): Git命令失败: fatal: destination path '.' already exists and is not an empty directory.
+2024-12-27 13:19:00,140 - github_manager - ERROR - 更新失败: 命令��行失败: Git命令失败: fatal: destination path '.' already exists and is not an empty directory.
+2024-12-27 13:19:06,757 - github_manager - WARNING - 命令失败 (尝试 1/3): Git命令失败: error: cannot open '.git/FETCH_HEAD': No such file or directory
+fatal: not a git repository (or any of the parent directories): .git
+2024-12-27 13:19:06,955 - github_manager - INFO - Successfully connected to GitHub
+2024-12-27 13:19:06,991 - github_manager - WARNING - 命令失败 (尝试 2/3): Git命令失败: fatal: not a git repository (or any of the parent directories): .git
+2024-12-27 13:19:07,184 - github_manager - INFO - Successfully connected to GitHub
+2024-12-27 13:19:07,217 - github_manager - WARNING - 命令失败 (尝试 3/3): Git命令失败: fatal: not a git repository (or any of the parent directories): .git
+2024-12-27 13:19:07,218 - github_manager - ERROR - 更新失败: 命令��行失败: Git命令失败: fatal: not a git repository (or any of the parent directories): .git
