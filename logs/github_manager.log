@@ -12,3 +12,4 @@ fatal: not a git repository (or any of the parent directories): .git
 2024-12-27 13:19:07,184 - github_manager - INFO - Successfully connected to GitHub
 2024-12-27 13:19:07,217 - github_manager - WARNING - 命令失败 (尝试 3/3): Git命令失败: fatal: not a git repository (or any of the parent directories): .git
 2024-12-27 13:19:07,218 - github_manager - ERROR - 更新失败: 命令��行失败: Git命令失败: fatal: not a git repository (or any of the parent directories): .git
+2024-12-27 13:49:16,844 - github_manager - INFO - 设置保存成功
