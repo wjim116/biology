@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>生物实验模拟平台</title>
+ <style>
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+ body {
+ font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+ line-height: 1.6;
+ color: #333;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 20px;
+ background-color: #f5f5f5;
+ }
+ header {
+ text-align: center;
+ padding: 40px 0;
+ background-color: #fff;
+ border-radius: 10px;
+ margin-bottom: 30px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ }
+ h1 {
+ color: #2c3e50;
+ margin-bottom: 20px;
+ }
+ .description {
+ color: #666;
+ margin-bottom: 20px;
+ }
+ .experiments-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ gap: 20px;
+ }
+ .experiment-card {
+ background: #fff;
+ padding: 20px;
+ border-radius: 10px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ transition: transform 0.3s ease;
+ }
+ .experiment-card:hover {
+ transform: translateY(-5px);
+ }
+ .experiment-card h2 {
+ color: #2c3e50;
+ margin-bottom: 15px;
+ }
+ .experiment-card p {
+ color: #666;
+ margin-bottom: 15px;
+ }
+ .experiment-card a {
+ display: inline-block;
+ padding: 10px 20px;
+ background-color: #3498db;
+ color: #fff;
+ text-decoration: none;
+ border-radius: 5px;
+ transition: background-color 0.3s ease;
+ }
+ .experiment-card a:hover {
+ background-color: #2980b9;
+ }
+ footer {
+ text-align: center;
+ margin-top: 50px;
+ padding: 20px;
+ color: #666;
+ }
+ </style>
+</head>
+<body>
+ <header>
+ <h1>生物实验模拟平台</h1>
+ <p class="description">通过交互式模拟实验，深入理解生物学概念和原理</p>
+ </header>
+ <div class="experiments-grid">
+ <div class="experiment-card">
+ <h2>基因分离模拟实验</h2>
+ <p>通过模拟实验理解孟德尔第一定律，观察基因分离现象。</p>
+ <a href="基因分离模拟实验/index.html">开始实验</a>
+ </div>
+ <div class="experiment-card">
+ <h2>自由组合模拟实验</h2>
+ <p>探索基因自由组合规律，理解孟德尔第二定律。</p>
+ <a href="自由组合模拟实验/index.html">开始实验</a>
+ </div>
+ </div>
+ <footer class="footer">
+ <div class="copyright">
+ <p>
+ © 2024 吴正准
+ 保留所有权利 | All Rights Reserved
+ 开发者：吴正准
+ </p>
+ </div>
+ </footer>
+</body>
+</html>
