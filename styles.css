@@ -1,0 +1,35 @@
+.footer {
+ padding: 20px 0;
+ text-align: center;
+ background-color: #f8f9fa;
+ margin-top: auto;
+}
+.copyright {
+ font-size: 14px;
+ color: #666;
+ line-height: 1.6;
+}
+.back-button {
+ position: fixed;
+ top: 20px;
+ left: 20px;
+ padding: 8px 15px;
+ background-color: #3498db;
+ color: white;
+ text-decoration: none;
+ border-radius: 5px;
+ font-size: 14px;
+ z-index: 1000;
+ transition: background-color 0.3s ease;
+}
+.back-button:hover {
+ background-color: #2980b9;
+}
+@media screen and (max-width: 393px) {
+ .back-button {
+ top: 10px;
+ left: 10px;
+ padding: 6px 12px;
+ font-size: 12px;
+ }
+}
