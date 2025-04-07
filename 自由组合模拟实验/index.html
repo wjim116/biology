@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black">
+ <meta name="format-detection" content="telephone=no">
+ <title>自由组合定律模拟实验</title>
+ <link rel="stylesheet" href="styles.css">
+ <style>
+ .back-button {
+ position: fixed;
+ top: 20px;
+ left: 20px;
+ padding: 8px 15px;
+ background-color: #3498db;
+ color: white;
+ text-decoration: none;
+ border-radius: 5px;
+ font-size: 14px;
+ z-index: 1000;
+ transition: background-color 0.3s ease;
+ }
+ .back-button:hover {
+ background-color: #2980b9;
+ }
+ </style>
+</head>
+<body>
+ <a href="../index.html" class="back-button">返回主页</a>
+ <div class="container">
+ <div class="section-block experiment-area">
+ <div class="title-row">
+ <h3 class="exp-title">自由组合模拟实验</h3>
+ <button id="help-btn" class="help-button">?</button>
+ </div>
+ <div class="author">(本网页由吴正准老师制作,如有建议请加微信13858716096反馈)</div>
+ <div class="exp-content">
+ <div class="exp-row f1-row">
+ <div class="f1-peas">
+ <div class="f1-pea">
+ <img src="黄圆.png" alt="黄圆">
+ </div>
+ <div class="f1-pea">
+ <img src="黄圆.png" alt="���圆">
+ </div>
+ </div>
+ <div class="row-label">F1:</div>
+ <div class="row-content">
+ <div class="parent-box">YyRr × YyRr</div>
+ </div>
+ </div>
+ <div class="exp-row separation-row">
+ <div class="row-label">自由组合</div>
+ <div class="gene-boxes">
+ <div class="gene-pair">
+ <div class="gene-box" id="female-y-box"></div>
+ <div class="gene-box" id="female-r-box"></div>
+ </div>
+ <div class="gene-pair">
+ <div class="gene-box" id="male-y-box"></div>
+ <div class="gene-box" id="male-r-box"></div>
+ </div>
+ </div>
+ </div>
+ <div class="exp-row gamete-row">
+ <div class="row-label">配子:</div>
+ <div class="gamete-boxes">
+ <div class="gamete-box" id="female-gamete"></div>
+ <div class="gamete-box" id="male-gamete"></div>
+ </div>
+ </div>
+ <div class="exp-row f2-row">
+ <div class="row-label">F2:</div>
+ <div class="f2-box" id="f2-result"></div>
+ </div>
+ <div class="exp-row phenotype-row">
+ <div class="row-label">表型:</div>
+ <div class="phenotype-display">
+ <div class="phenotype-box" id="phenotype-result"></div>
+ <div class="pea-image" id="pea-display"></div>
+ </div>
+ </div>
+ <div class="control-panel">
+ <div class="control-row">
+ <button id="female-gamete-btn">形成雌配子</button>
+ <button id="male-gamete-btn">形成雄配子</button>
+ </div>
+ <div class="control-row">
+ <button id="fertilization-btn">完成受精</button>
+ </div>
+ <div class="control-row">
+ <button id="single-sim">单次模拟</button>
+ <button id="sim-10">模拟10次</button>
+ <button id="sim-100">模拟100次</button>
+ <button id="sim-1000">模拟1000次</button>
+ </div>
+ <div class="control-row">
+ <button id="stats-btn">统计结果</button>
+ <button id="clear-btn">清空</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="section-block phenotype-stats-column">
+ <h3 class="block-title">表型统计</h3>
+ <table class="stats-table">
+ <thead>
+ <tr>
+ <th>表型</th>
+ <th>统计值</th>
+ <th>与绿皱比</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Y_R_黄圆</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>Y_rr黄皱</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>yyR_绿圆</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>yyrr绿皱</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ <div class="section-block genotype-stats-column">
+ <h3 class="block-title">基因型统计</h3>
+ <table class="stats-table">
+ <thead>
+ <tr>
+ <th>基因型</th>
+ <th>统计值</th>
+ <th>与yyrr比</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>YYRR</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>YYRr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>YYrr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>YyRR</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>YyRr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>Yyrr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>yyRR</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>yyRr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ <tr>
+ <td>yyrr</td>
+ <td class="number">0</td>
+ <td class="number">0.00</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+ <div id="rules-modal" class="modal">
+ <div class="modal-content">
+ <span class="close-button">&times;</span>
+ <h2>实验说明</h2>
+ <div class="rules-content">
+ <h3>一、实验背景</h3>
+ <p>这是一个模拟豌豆杂交实验的应用,研究两对相对性状(黄色/绿色、圆形/皱形)的遗传规律.</p>
+ <h3>二、使用说明</h3>
+ <h4>1. 基本操作:</h4>
+ <ul>
+ <li>点击"形成雌配子"和"形成雄配子"按钮生成配子</li>
+ <li>点击"完成受精"按钮完成杂交</li>
+ <li>可以进行单次实验或批量模拟(10次、100次、1000次)</li>
+ <li>统计结果会自动更新在右侧表格中</li>
+ </ul>
+ <h3>三、基因规则</h3>
+ <h4>1. 基因表示:</h4>
+ <ul>
+ <li>Y/y: 控制颜色,Y表示黄色(显性),y表示绿色(隐性)</li>
+ <li>R/r: 控制形状,R表示圆形(显性),r表示皱形(隐性)</li>
+ </ul>
+ <h4>2. 表型判断:</h4>
+ <ul>
+ <li>只要有Y就表现为黄色,两个y才表现为绿色</li>
+ <li>只要有R就表现为圆形,两个r才表现为皱形</li>
+ </ul>
+ <h3>四、预期结果</h3>
+ <p>通过大量实验,表型比例应趋近于:</p>
+ <p>黄圆:黄皱:绿圆:绿皱 = 9:3:3:1</p>
+ </div>
+ </div>
+ </div>
+ <div id="donate-trigger">
+ ❤️ 打赏支持
+ </div>
+ <div class="overlay" id="overlay"></div>
+ <div class="donate-panel" id="donate-panel">
+ <div class="donate-content">
+ <div class="motivation-text">
+ 🌟 <strong>感谢使用本工具!</strong><br>
+ • 您的每一份支持都将转化为:<br>
+ •❤️ 服务器续费<br>
+ •🛠️ 持续开发维护<br>
+ •☕ 深夜码农的咖啡燃料<br>
+ •👶 宝宝最爱的芦浦炒米
+ </div>
+ <div class="donate-header">
+ <svg viewBox="0 0 24 24" width="20" height="20" fill="#ff4daf">
+ <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+ </svg>
+ 支持开发者
+ <span class="sparkle">✨</span>
+ </div>
+ <div class="qr-grid">
+ <div class="qr-item">
+ <p>微信扫码支持</p>
+ <img src="https://static-mp-841244f4-3ad3-40fc-a1fc-d5359b23444f.next.bspapp.com/money-pic/WeChat.jpg" alt="微信赞赏码">
+ <div class="qr-tips">
+ <p>❤️持续创作需要您的支持</p>
+ <p class="qr-proverb">星火相聚,终成光芒</p>
+ </div>
+ </div>
+ <div class="qr-item">
+ <p>支付宝扫码支持</p>
+ <img src="https://static-mp-841244f4-3ad3-40fc-a1fc-d5359b23444f.next.bspapp.com/money-pic/alipay.jpg" alt="支付宝收款码">
+ <div class="qr-tips">
+ <p>🌸每一份心意都值得珍惜</p>
+ <p class="qr-proverb">不啻微芒,造矩成阳</p>
+ </div>
+ </div>
+ </div>
+ <div class="donate-header">
+ <svg viewBox="0 0 24 24" width="20" height="20" fill="#ff4daf">
+ <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+ </svg>
+ 感谢您的支持!
+ <span class="sparkle">✨</span>
+ </div>
+ <div class="close-section">
+ <div class="close-text">感谢开发者,已支持~</div>
+ </div>
+ </div>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="script.js"></script>
+</body>
+</html>
