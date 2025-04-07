@@ -933,8 +933,8 @@ button:hover {
  left: 50%;
  transform: translate(-50%, -50%);
  z-index: 1000;
- max-height: 90vh;
- max-width: 90vw;
+ max-height: 95vh;
+ max-width: 100vw;
  overflow-y: auto;
  background: white;
  border-radius: 16px;
@@ -944,7 +944,7 @@ button:hover {
  background: linear-gradient(135deg, #fff5f5 0%, #fff0f7 100%);
 }
 .motivation-text {
- font-size: 13px;
+ font-size: 16px;
  color: #666;
  line-height: 1.6;
  margin: 12px 0;
@@ -972,6 +972,12 @@ button:hover {
  margin: 24px auto;
 }
 @media screen and (max-width: 768px) {
+ .donate-panel {
+ max-height: 88vh;
+ max-width: 100vw;
+ width: 100vw;
+ box-sizing: border-box;
+ }
  .qr-grid {
  grid-template-columns: 1fr;
  gap: 16px;
